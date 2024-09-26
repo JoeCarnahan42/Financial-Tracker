@@ -26,6 +26,8 @@ let previousSaving = 0;
 updateDisplay();
 
 // Functions
+
+// Updates Top Display With Current Balances //
 function updateDisplay() {
   const checkingTotal = "Checking: $" + checkingAccount;
   const savingsTotal = "Savings: $" + savingsAccount;
@@ -39,11 +41,13 @@ function updateDisplay() {
   });
 }
 
+// Enables Selectors For Adding Or Subtracting //
 function enableSelectors() {
   addFundsSelector.removeAttribute("disabled");
   subtractFundsSelector.removeAttribute("disabled");
 }
 
+// Checks Inputs To Activate Submit Button //
 function checkInputs() {
   if (
     addedFunds.value != "" &&
@@ -62,8 +66,11 @@ function checkInputs() {
   }
 }
 
+// Reveals Elements Related To Adding Funds //
 function addFundsShow() {
+  // Stops Form From Resetting //
   event.preventDefault();
+
   // Control Visible Elements //
   addFundsLabel.removeAttribute("hidden");
   addedFunds.removeAttribute("hidden");
@@ -73,6 +80,7 @@ function addFundsShow() {
   addedFunds.setAttribute("required", true);
   addedDate.setAttribute("required", true);
   transactionMessage.setAttribute("required", true);
+
   // Control Hidden Elements //
   subFundsLabel.setAttribute("hidden", true);
   subtractedFunds.setAttribute("hidden", true);
@@ -81,8 +89,11 @@ function addFundsShow() {
   subtractedDate.removeAttribute("required");
 }
 
+// Reveals Elements Related To Subtracting Funds //
 function subFundsShow() {
+  // Stops Form From Resetting //
   event.preventDefault();
+
   // Control Visible Elements //
   subFundsLabel.removeAttribute("hidden");
   subtractedFunds.removeAttribute("hidden");
@@ -92,6 +103,7 @@ function subFundsShow() {
   subtractedFunds.setAttribute("required", true);
   subtractedDate.setAttribute("required", true);
   transactionMessage.setAttribute("required", true);
+
   // Control Hidden Elements //
   addFundsLabel.setAttribute("hidden", true);
   addedFunds.setAttribute("hidden", true);
@@ -100,69 +112,82 @@ function subFundsShow() {
   addedDate.removeAttribute("required");
 }
 
+// Processes Transaction //
 function submitTransaction() {
-  // ADD LOGIC FOR TRANSACTIONS //
   if (checkingSelector.checked && addedFunds.required) {
+    // Stops Form From Resetting //
     event.preventDefault();
 
-    // Changes addedFunds value to a number data type //
+    // Changes fundsToAdd To A Number From String //
     const fundsToAdd = parseFloat(addedFunds.value);
+
+    // Checks That fundsToAdd Is A Number & Is > 0 //
     if (!isNaN(fundsToAdd) && fundsToAdd > 0) {
-      previousChecking = checkingAccount;
-      checkingAccount += fundsToAdd;
+      previousChecking = checkingAccount; // Updates Previous Balance //
+      checkingAccount += fundsToAdd; // Updates Current Balance //
       transactionArray.unshift(
         `[CHECKING DEPOSIT] [Previous Balance: $${previousChecking}] [Deposited: $${addedFunds.value}] [New Balance: $${checkingAccount}] [Memo: ${transactionMessage.value}] [Date: ${addedDate.value}]`
-      );
+      ); // Adds Transaction To An Array For Display //
       updateDisplay();
+
+      // Resets Input Areas //
       addedFunds.value = "";
       transactionMessage.value = "";
       finalize.setAttribute("disabled", true);
-    } else {
-      alert("Please enter a valid amount.");
     }
   } else if (checkingSelector.checked && subtractedFunds.required) {
+    // Stops Form From Resetting //
     event.preventDefault();
 
-    // Changes addedFunds value to a number data type //
+    // Changes fundsToAdd To A Number From String //
     const fundsToSubtract = parseFloat(subtractedFunds.value);
+
+    // Checks That fundsToSubtract Is A Number & Is > 0 //
     if (!isNaN(fundsToSubtract) && fundsToSubtract > 0) {
-      previousChecking = checkingAccount;
-      checkingAccount -= fundsToSubtract;
+      previousChecking = checkingAccount; // Updates Previous Balance //
+      checkingAccount -= fundsToSubtract; // Updates Current Balance //
       transactionArray.unshift(
         `[CHECKING WITHDRAWAL] [Previous Balance: $${previousChecking}] [Withdrawn: $${subtractedFunds.value}] [New Balance: $${checkingAccount}] [Memo: ${transactionMessage.value}] [Date: ${subtractedDate.value}]`
-      );
+      ); // Adds Transaction To An Array For Display //
       updateDisplay();
+
+      // Resets Input Areas //
       subtractedFunds.value = "";
       transactionMessage.value = "";
       finalize.setAttribute("disabled", true);
-    } else {
-      alert("Please enter a valid amount.");
     }
   } else if (savingsSelector.checked && addedFunds.required) {
+    // Changes fundsToAdd To A Number From String //
     const fundsToAdd = parseFloat(addedFunds.value);
 
+    // Checks That fundsToAdd Is A Number & Is > 0 //
     if (!isNaN(fundsToAdd) && fundsToAdd > 0) {
-      previousSaving = savingsAccount;
-      savingsAccount += fundsToAdd;
+      previousSaving = savingsAccount; // Updates Previous Balance //
+      savingsAccount += fundsToAdd; // Updates Current Balance //
       transactionArray.unshift(
         `[SAVINGS DEPOSIT] [Previous Balance: $${previousSaving}] [Deposited: $${addedFunds.value}] [New Balance: $${savingsAccount}] [Memo: ${transactionMessage.value}] [Date: ${addedDate.value}]`
-      );
+      ); // Adds Transaction To An Array For Display //
       updateDisplay();
+
+      // Resets Input Areas //
       addedFunds.value = "";
       transactionMessage.value = "";
       finalize.setAttribute("disabled", true);
-    } else {
-      alert("Please enter a valid amount.");
     }
   } else if (savingsSelector.checked && subtractedFunds.required) {
+    // Changes fundsToAdd To A Number From String //
     const fundsToSubtract = parseFloat(subtractedFunds.value);
+
+    // Checks That fundsToSubtract Is A Number & Is > 0 //
     if (!isNaN(fundsToSubtract) && fundsToSubtract > 0) {
-      previousSaving = savingsAccount;
-      savingsAccount -= fundsToSubtract;
+      previousSaving = savingsAccount; // Updates Previous Balance //
+      savingsAccount -= fundsToSubtract; // Updates Current Balance //
       transactionArray.unshift(
         `[SAVINGS WITHDRAWAL] [Previous Balance: $${previousSaving}] [Withdrawn: $${subtractedFunds.value}] [New Balance: $${savingsAccount}] [Memo: ${transactionMessage.value}] [Date: ${subtractedDate.value}]`
-      );
+      ); // Adds Transaction To An Array For Display //
       updateDisplay();
+
+      // Resets Input Areas //
       subtractedFunds.value = "";
       transactionMessage.value = "";
       finalize.setAttribute("disabled".true);
@@ -184,6 +209,3 @@ subtractedDate.addEventListener("input", checkInputs);
 transactionMessage.addEventListener("input", checkInputs);
 addFundsSelector.addEventListener("click", addFundsShow);
 subtractFundsSelector.addEventListener("click", subFundsShow);
-
-// FIND A WAY TO SHOW FULL NUMBER //
-// EX. 25.50 SHOWS UP AS 25.5 //
