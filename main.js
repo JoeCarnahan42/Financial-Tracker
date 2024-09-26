@@ -77,6 +77,7 @@ function addFundsShow() {
   addedDate.removeAttribute("hidden");
   memoLabel.removeAttribute("hidden");
   transactionMessage.removeAttribute("hidden");
+  finalize.removeAttribute("hidden");
   addedFunds.setAttribute("required", true);
   addedDate.setAttribute("required", true);
   transactionMessage.setAttribute("required", true);
@@ -100,6 +101,7 @@ function subFundsShow() {
   subtractedDate.removeAttribute("hidden");
   memoLabel.removeAttribute("hidden");
   transactionMessage.removeAttribute("hidden");
+  finalize.removeAttribute("hidden");
   subtractedFunds.setAttribute("required", true);
   subtractedDate.setAttribute("required", true);
   transactionMessage.setAttribute("required", true);
