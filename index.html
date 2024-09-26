@@ -12,25 +12,28 @@
         Account Totals:
         <!--string interpolation-->
       </h2>
-      <h2>Which account do you want to view?</h2>
+      <h2>Which account do you want to change?</h2>
       <label for="checking">Checking:</label>
       <input name="account" id="checking-selector" type="radio" />
       <label for="savings">Savings:</label>
       <input name="account" id="savings-selector" type="radio" />
+      <br />
+      <br />
     </form>
     <form id="checking-adjusting">
       <button id="add-funds-selector" disabled>Add Funds</button>
       <button id="subtract-funds-selector" disabled>Subtract Funds</button>
       <br />
-      <label id="add-funds-label" for="add-funds" hidden>Add Funds</label>
+      <br />
+      <label id="add-funds-label" for="add-funds" hidden>Add Funds: $</label>
       <input id="add-funds" type="text" hidden />
       <input id="addition-date" type="date" hidden />
-      <br />
       <label id="sub-funds-label" for="subtract-funds" hidden
-        >Subtract Funds</label
+        >Subtract Funds: $</label
       >
       <input id="subtract-funds" type="text" hidden />
       <input id="subtraction-date" type="date" hidden />
+      <br />
       <br />
       <label id="memo-label" for="memo" hidden>Memo:</label>
       <textarea id="memo" placeholder="Describe the change" hidden></textarea>
